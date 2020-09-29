@@ -1,0 +1,117 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h1 style="text-align: center">Sensors</h1><br>
+      <div class="row" [hidden]="!deleteMessage">
+
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                        <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Sensor Data Deleted</strong>
+                        </div>
+                </div>
+                <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+
+  <div class="panel-body">
+      <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"  >
+          <thead class="thead-light">
+              <tr>
+                <th>Update</th>
+                <th>Name</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Range</th>
+                <th>Unit</th>
+                <th>Location</th>
+                <th>Delete</th>
+              </tr>
+          </thead>
+          <tbody>
+               <tr *ngFor="let sensor of sensors ">
+                  <td><button (click)="updateSensor(sensor.id)" class='btn btn-info'
+                              data-toggle="modal" data-target="#myModal">Update</button></td>
+                  <td>{{sensor.name}}</td>
+                  <td>{{sensor.model}}</td>
+                  <td>{{sensor.type}}</td>
+                  <td>{{sensor.rangeFrom}}-{{rangeTo}}</td>
+                 <td>{{sensor.unit}}</td>
+                 <td>{{sensor.location}}</td>
+                  <td><button (click)="deleteSensor(sensor.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+
+                  </td>
+                </tr>
+          </tbody><br>
+      </table>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+                <form [formGroup]="sensorupdateform" #updsnsr (ngSubmit)="updateSnsr(updsnsr)">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center">Update Sensor</h4>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let sensor of sensorlist " >
+                <div [hidden]="isupdated">
+
+                    <input type="hidden" class="form-control"  formControlName="id" [(ngModel)]="sensor.id">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.name"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="model">Model</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.model"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="rangeFrom">RangeFrom</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.rangeFrom"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="rangeTo">RangeTo</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.rangeTo"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.type"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">Unit</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.unit"  >
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control"  formControlName="name" [(ngModel)]="sensor.location"  >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" formControlName="description" [(ngModel)]="sensor.description">
+                            </div>
+
+                  </div>
+                  <div [hidden]="!isupdated">
+                      <h4>Sensor Updated!</h4>
+                  </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer" >
+              <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+            </div>
+
+        </form>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,76 @@
+<h3>Create Sensor</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="sensorsaveform" #savesensor (ngSubmit)="saveSensor(saveSensor)">
+        <div class="form-group">
+          <label for="name">Sensor Name</label>
+          <input type="text" class="form-control" formControlName="name" data-toggle="tooltip"
+                 data-placement="right" title="Enter Sensor Name">
+          <div class="alert alert-danger" *ngIf="(SensorName.touched) && (SensorName.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="SensorName.errors.required">Sensor Name is Required</span>
+            <span *ngIf="SensorName.errors.minlength">
+                        MinLength Error
+                    </span>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="name">Sensor Model</label>
+          <input type="text" class="form-control" formControlName="model" data-toggle="tooltip"
+                 data-placement="right" title="Enter Sensor Model">
+          <div class="alert alert-danger" *ngIf="(SensorModel.touched) && (SensorModel.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="SensorModel.errors.required">Sensor Model is Required</span>
+            <span *ngIf="SensorModel.errors.minlength">
+                        MinLength Error
+                    </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Sensor Type</label>
+          <input type="text" class="form-control" formControlType="type"
+                 data-toggle="tooltip" data-placement="right" title="Enter Sensor Type">
+          <div class="alert alert-danger" *ngIf="(SensorType.touched) && (SensorType.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="SensorType.errors.required">City Description is Required</span>
+            <span *ngIf="SensorType.errors.description">
+                        Invalid Type
+                    </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Sensor Unit</label>
+          <input type="text" class="form-control" formControlUnit="unit"
+                 data-toggle="tooltip" data-placement="right" title="Enter Sensor Unit">
+          <div class="alert alert-danger" *ngIf="(SensorUnit.touched) && (SensorUnit.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="SensorUnit.errors.required">Sensor Unit is Required</span>
+            <span *ngIf="SensorUnit.errors.description">
+                        Invalid Unit
+                    </span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="!submitted">
+      <h4>Sensor Added SuccessFully!</h4>
+      <button (click)="addSensorForm()" class='btn btn-primary'>Add More Sensors</button>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+
